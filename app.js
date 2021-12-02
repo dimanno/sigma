@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 const {PORT, MONGO_CONNECT, NODE_ENV, ALLOWED_ORIGIN} = require('./configs/config')
 const {usersRouter, authRouter} = require('./routes')
+const ErrorHandler = require('./errors/errors.handler');
 
 const app = express();
 

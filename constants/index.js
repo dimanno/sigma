@@ -2,5 +2,6 @@ module.exports = {
     const: require('./const'),
     messageResponse: require('./message.respose.enum'),
     regExp: require('./regExp'),
-    statusCodeResponse: require('./status.code.response.enum')
+    statusCodeResponse: require('./status.code.response.enum'),
+    tokenType: require('./tokens.type.enum')
 };
