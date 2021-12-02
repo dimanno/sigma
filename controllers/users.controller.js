@@ -17,5 +17,40 @@ module.exports = {
         } catch (e) {
             next(e)
         }
+    },
+
+    getUsers: (req, res, next) => {
+        try {
+            const users = User.find({}).lean();
+            const normUsers = users.map(user => userNormalize(user));
+
+            res.json(normUsers);
+        } catch (e) {
+            next(e)
+        }
+    },
+
+    getUserById: (req, res, next) => {
+        try {
+
+        } catch (e) {
+            next(e)
+        }
+    },
+
+    updateUser: (req, res, next) => {
+        try {
+
+        } catch (e) {
+            next(e)
+        }
+    },
+
+    deleteUser: (req, res, next) => {
+        try {
+
+        } catch (e) {
+            next(e)
+        }
     }
 }

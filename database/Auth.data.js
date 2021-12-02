@@ -13,7 +13,7 @@ const AuthDataSchema = new Schema({
     },
     user_id: {
         type: Schema.Types.ObjectId,
-        required: true,
+        // required: true,
         ref: 'user'
     }
 }, {timestamps: true, toObject: {virtuals: true}, toJSON: {virtuals: true}});
@@ -22,4 +22,4 @@ AuthDataSchema.pre('findOne', function() {
     this.populate('user_id');
 });
 
-module.exports = model('o_auth', AuthDataSchema);
+module.exports = model('authData', AuthDataSchema);

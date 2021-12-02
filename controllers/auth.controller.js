@@ -3,22 +3,25 @@ const {passwordService} = require('../services');
 const {userNormalize} = require('../handlers/user.normalize');
 const {messageResponse, statusCodeResponse} = require('../constants');
 const ErrorHandler = require('../errors/errors.handler');
-const {serve} = require("swagger-ui-express");
+
 const {jwtService: {generateTokenPair, verifyToken}} = require('../services')
 
 module.exports = {
-    login: (req, res, next) => {
+    login: async (req, res, next) => {
         try {
-            const {user} = req;
+            const user = req.body;
+            console.log(user)
             const tokenPair = generateTokenPair();
+            console.log(tokenPair)
+            const userNormalized = userNormalize(user)
 
-            // await AuthData.create({
-            //     ...tokenPair,
-            //     user_id: user._id
-            // });
+            await AuthData.create({
+                ...tokenPair,
+                user_id: userNormalized._id
+            });
 
             res.json({
-                user,
+                userNormalized,
                 ...tokenPair
             });
         } catch (e) {
