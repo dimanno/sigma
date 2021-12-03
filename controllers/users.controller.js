@@ -15,7 +15,7 @@ module.exports = {
 
             res.status(statusCodeResponse.CREATED).json(userNormalise);
         } catch (e) {
-            next(e)
+            next(e);
         }
     },
 
@@ -26,7 +26,7 @@ module.exports = {
 
             res.json(normUsers);
         } catch (e) {
-            next(e)
+            next(e);
         }
     },
 
@@ -34,36 +34,36 @@ module.exports = {
         try {
             const user = userNormalize(req.body);
 
-            res.json(user)
+            res.json(user);
         } catch (e) {
-            next(e)
+            next(e);
         }
     },
 
     updateUser: async (req, res, next) => {
         try {
-            const {user_id} = req.params
+            const {user_id} = req.params;
 
             const user = req.body;
             const userUpdated = await User.findByIdAndUpdate(user_id,
-                user, {new: true})
+                user, {new: true});
 
-            res.json(userUpdated)
+            res.json(userUpdated);
         } catch (e) {
-            next(e)
+            next(e);
         }
     },
 
     deleteUser: async (req, res, next) => {
         try {
-            const {_id} = req.user;
+            const {user_id:{_id}} = req.user;
             console.log(_id);
             await User.deleteOne({_id});
             await AuthData.deleteOne({user_id: _id});
 
             res.sendStatus(statusCodeResponse.NO_DATA);
         } catch (e) {
-            next(e)
+            next(e);
         }
     }
-}
+};

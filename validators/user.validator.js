@@ -25,6 +25,11 @@ const addUser_validator = Joi.object({
 });
 
 const updateUserValidator = Joi.object({
+    password: Joi
+        .string()
+        .regex(PASSWORD_REGEXP)
+        .required()
+        .trim(),
     name: Joi
         .string()
         .alphanum()
@@ -32,6 +37,9 @@ const updateUserValidator = Joi.object({
         .max(30)
         .trim()
         .required(),
+    age: Joi
+        .number()
+
 });
 
 module.exports = {

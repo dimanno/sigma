@@ -42,7 +42,7 @@ module.exports = {
             const user = await User.findOne({user_id}).lean();
 
             if (!user && user_id) {
-                throw  new ErrorHandler(messageResponse.USER_NOT_FOUND, statusCodeResponse.NOT_FOUND)
+                throw  new ErrorHandler(messageResponse.USER_NOT_FOUND, statusCodeResponse.NOT_FOUND);
             }
 
             req.body = user;
