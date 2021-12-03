@@ -22,4 +22,4 @@ AuthDataSchema.pre('findOne', function() {
     this.populate('user_id');
 });
 
-module.exports = model('authData', AuthDataSchema);
+module.exports = model('o_auth', AuthDataSchema);
