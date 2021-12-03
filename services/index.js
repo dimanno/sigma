@@ -1,4 +1,4 @@
 module.exports = {
     passwordService: require('./password.service'),
-    jwtService: require('./jwt.server')
+    jwtService: require('./jwt.service')
 };

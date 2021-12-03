@@ -1,4 +1,4 @@
-const {User} = require('../database');
+const {User, AuthData} = require('../database');
 const {passwordService} = require('../services');
 const {userNormalize} = require('../handlers/user.normalize');
 const {messageResponse, statusCodeResponse} = require('../constants');
@@ -19,9 +19,9 @@ module.exports = {
         }
     },
 
-    getUsers: (req, res, next) => {
+    getUsers: async (req, res, next) => {
         try {
-            const users = User.find({}).lean();
+            const users = await User.find({}).lean();
             const normUsers = users.map(user => userNormalize(user));
 
             res.json(normUsers);
@@ -32,23 +32,36 @@ module.exports = {
 
     getUserById: (req, res, next) => {
         try {
+            const user = userNormalize(req.body);
 
+            res.json(user)
         } catch (e) {
             next(e)
         }
     },
 
-    updateUser: (req, res, next) => {
+    updateUser: async (req, res, next) => {
         try {
+            const {user_id} = req.params
 
+            const user = req.body;
+            const userUpdated = await User.findByIdAndUpdate(user_id,
+                user, {new: true})
+
+            res.json(userUpdated)
         } catch (e) {
             next(e)
         }
     },
 
-    deleteUser: (req, res, next) => {
+    deleteUser: async (req, res, next) => {
         try {
+            const {_id} = req.user;
+            console.log(_id);
+            await User.deleteOne({_id});
+            await AuthData.deleteOne({user_id: _id});
 
+            res.sendStatus(statusCodeResponse.NO_DATA);
         } catch (e) {
             next(e)
         }

@@ -3,17 +3,17 @@ const {messageResponse, statusCodeResponse} = require('../constants');
 const ErrorHandler = require('../errors/errors.handler');
 
 module.exports = {
-    checkUserExist: async (req, res, next) => {
+    checkEmailExist: async (req, res, next) => {
         try {
-            const user = await User.findOne({email: req.body.email});
-            console.log(user)
-            if (user) {
+            const userByEmail = await User.findOne({email: req.body.email});
+
+            if (userByEmail) {
                 throw new ErrorHandler(messageResponse.DATA_EXIST, statusCodeResponse.FORBIDDEN);
             }
 
             next();
         } catch (e) {
-            next(e)
+            next(e);
         }
     },
 
@@ -24,7 +24,7 @@ module.exports = {
                 .findOne({email: req.body.email})
                 .select('+password')
                 .lean();
-            console.log(user)
+
             if (!user) {
                 throw new ErrorHandler(messageResponse.USER_NOT_FOUND, statusCodeResponse.NOT_FOUND);
             }
@@ -32,7 +32,23 @@ module.exports = {
             req.user = user;
             next();
         } catch (e) {
-            next(e)
+            next(e);
         }
-    }
-};
+    },
+
+    checkUserById: async (req, res, next) => {
+        try {
+            const {user_id} = req.params;
+            const user = await User.findOne({user_id}).lean();
+
+            if (!user && user_id) {
+                throw  new ErrorHandler(messageResponse.USER_NOT_FOUND, statusCodeResponse.NOT_FOUND)
+            }
+
+            req.body = user;
+            next();
+        } catch (e) {
+            next(e);
+        }
+    },
+}
