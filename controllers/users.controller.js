@@ -1,6 +1,6 @@
 const {User, AuthData, } = require('../database');
 const {passwordService} = require('../services');
-const {userNormalize} = require('../handlers/user.normalize');
+const {userNormalize:{userNormalize}} = require('../handlers');
 const {statusCodeResponse} = require('../constants');
 
 module.exports = {

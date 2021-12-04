@@ -1,9 +1,10 @@
 const express = require('express');
 const mongoose = require("mongoose");
 
-const {PORT, MONGO_CONNECT, NODE_ENV, ALLOWED_ORIGIN} = require('./configs/config')
-const {usersRouter, authRouter} = require('./routes')
+const {PORT, MONGO_CONNECT, NODE_ENV, ALLOWED_ORIGIN} = require('./configs/config');
+const {usersRouter, authRouter} = require('./routes');
 const ErrorHandler = require('./errors/errors.handler');
+const insertDefaultData = require('./handlers/default.user')
 
 const app = express();
 
@@ -28,6 +29,8 @@ app.use('*', (err, req, res, next) => {
 
 app.listen(PORT, () => {
     console.log(`app listen ${PORT}`);
+
+    insertDefaultData();
 });
 
 function _configCors(origin, callback) {
