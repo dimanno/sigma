@@ -39,7 +39,7 @@ module.exports = {
     checkUserById: async (req, res, next) => {
         try {
             const {user_id} = req.params;
-            const user = await User.findOne({user_id}).lean();
+            const user = await User.findById(user_id).lean();
 
             if (!user && user_id) {
                 throw  new ErrorHandler(messageResponse.USER_NOT_FOUND, statusCodeResponse.NOT_FOUND);

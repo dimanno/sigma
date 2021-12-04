@@ -7,7 +7,7 @@ module.exports = {
             const {error, value} = validator.validate(req.body)
 
             if (error) {
-                throw new ErrorHandler(messageResponse.WRONG_LOGIN_DATA, statusCodeResponse.NOT_FOUND)
+                throw new ErrorHandler(error.details[0].message, statusCodeResponse.BAD_REQUEST);
             }
 
             req.body = value;

@@ -1,5 +1,7 @@
 const {Schema, model} = require('mongoose');
 
+const {models_name} = require('../constants')
+
 const userSchema = new Schema({
     email: {
         type: String,
@@ -22,4 +24,14 @@ const userSchema = new Schema({
     },
 }, {timestamps:true});
 
-module.exports = model('user', userSchema);
+module.exports = userSchema.statics = {
+    updateData(userId, userDataObject) {
+        return this.findByIdAndUpdate(
+            userId,
+            userDataObject,
+            {new: true, runValidators: true}
+        ).lean();
+    },
+}
+
+module.exports = model(models_name.USER, userSchema);

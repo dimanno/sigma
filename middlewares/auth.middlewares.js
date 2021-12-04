@@ -10,6 +10,7 @@ module.exports = {
         try {
             const {password} = req.body;
             const {password: hashPassword} = req.user;
+
             await compare(password, hashPassword);
 
             next();

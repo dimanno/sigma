@@ -1,5 +1,7 @@
 const {Schema, model} = require('mongoose');
 
+const {models_name} = require('../constants');
+
 const AuthDataSchema = new Schema({
     access_token: {
         type: String,
@@ -22,4 +24,4 @@ AuthDataSchema.pre('findOne', function() {
     this.populate('user_id');
 });
 
-module.exports = model('o_auth', AuthDataSchema);
+module.exports = model(models_name.AUTH_DATA, AuthDataSchema);

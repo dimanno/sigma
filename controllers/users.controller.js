@@ -1,8 +1,7 @@
-const {User, AuthData} = require('../database');
+const {User, AuthData, } = require('../database');
 const {passwordService} = require('../services');
 const {userNormalize} = require('../handlers/user.normalize');
-const {messageResponse, statusCodeResponse} = require('../constants');
-const ErrorHandler = require('../errors/errors.handler');
+const {statusCodeResponse} = require('../constants');
 
 module.exports = {
     addUser: async (req, res, next) => {
@@ -43,9 +42,8 @@ module.exports = {
     updateUser: async (req, res, next) => {
         try {
             const {user_id} = req.params;
-
             const user = req.body;
-            const userUpdated = await User.findByIdAndUpdate(user_id,
+            const userUpdated = await User.updateData(user_id,
                 user, {new: true});
 
             res.json(userUpdated);
@@ -56,10 +54,10 @@ module.exports = {
 
     deleteUser: async (req, res, next) => {
         try {
-            const {user_id:{_id}} = req.user;
-            console.log(_id);
-            await User.deleteOne({_id});
-            await AuthData.deleteOne({user_id: _id});
+            const {user_id} = req.params;
+
+            await User.deleteOne({user_id});
+            await AuthData.deleteOne({...user_id});
 
             res.sendStatus(statusCodeResponse.NO_DATA);
         } catch (e) {
