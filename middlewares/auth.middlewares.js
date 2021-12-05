@@ -1,6 +1,5 @@
-const {messageResponse, statusCodeResponse, tokenTypeEnum, constants} = require('../constants');
+const {messageResponse, statusCodeResponse, constants} = require('../constants');
 const ErrorHandler = require('../errors/errors.handler');
-const {authValidator: {authValidator}} = require('../validators');
 const {passwordService: {compare}, jwtService} = require('../services');
 const {AuthData} = require('../database');
 

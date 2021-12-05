@@ -5,7 +5,7 @@ const {usersController} = require('../controllers');
 const {tokenTypeEnum: {ACCESS}}= require('../constants');
 const {userValidator:{addUser_validator, updateUserValidator}} = require('../validators')
 
-// router.use(authMiddlewares.checkToken(ACCESS))
+router.use(authMiddlewares.checkToken(ACCESS))
 
 router.post('/',
     universalMiddlewares.checkValidDataMiddleware(addUser_validator),

@@ -1,5 +1,5 @@
 const ErrorHandler = require('../errors/errors.handler');
-const {messageResponse, statusCodeResponse} = require('../constants');
+const {statusCodeResponse} = require('../constants');
 
 module.exports = {
     checkValidDataMiddleware: (validator) => (req, res, next) => {
