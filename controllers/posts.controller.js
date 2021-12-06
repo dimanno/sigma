@@ -5,8 +5,9 @@ const {postValidator} = require('../validators');
 module.exports = {
     addPost: async (req, res, next) => {
         try {
-            const {user_id} = req.params
-            const post = await Posts.create({...req.body, user_id: user_id});
+            const {user_id:{_id}} = req.user
+            console.log(_id)
+            const post = await Posts.create({...req.body, user_id: _id});
 
             res.status(statusCodeResponse.CREATED).json(post);
         } catch (e) {
@@ -37,9 +38,12 @@ module.exports = {
 
     updatePost: async (req, res, next) => {
         try {
-            const {user_id} = req.params;
+            // const {user_id:{_id}} = req.user
+
+            const post_id = req.params
             const post = req.body;
-            const postUpdated = await Posts.updateData(user_id,
+
+            const postUpdated = await Posts.updateData(post_id,
                 post, {new: true});
 
             res.json(postUpdated);
@@ -50,9 +54,9 @@ module.exports = {
 
     deletePost:async (req, res, next) => {
         try {
-            const {user_id} = req.params;
 
-            await Posts.deleteOne({user_id});
+            const post_id = req.params
+            await Posts.deleteOne({post_id});
 
             res.sendStatus(statusCodeResponse.NO_DATA);
         } catch (e) {

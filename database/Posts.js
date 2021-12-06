@@ -7,11 +7,6 @@ const PostsSchema = new Schema({
         type: String,
         required: true,
     },
-    updateAt: {
-        type: String,
-        timestamps: true,
-        required: true
-    },
     user_id: {
         type: Schema.Types.ObjectId,
         required: true,
