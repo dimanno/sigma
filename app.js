@@ -1,17 +1,25 @@
 const express = require('express');
 const mongoose = require("mongoose");
+const rateLimit = require('express-rate-limit');
 
 require('dotenv').config();
 
 const {PORT, MONGO_CONNECT, NODE_ENV, ALLOWED_ORIGIN} = require('./configs/config');
 const {usersRouter, authRouter, postRouter} = require('./routes');
 const ErrorHandler = require('./errors/errors.handler');
-const insertDefaultData = require('./handlers/default.user')
+const cors = require('cors');
+const insertDefaultData = require('./handlers/default.user');
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+app.use(cors({origin: _configCors}));
+app.use(rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+}));
 
 mongoose.connect(MONGO_CONNECT).then(()=>{
     console.log('mongo connect successfully');
