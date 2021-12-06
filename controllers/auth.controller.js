@@ -1,5 +1,5 @@
 const {AuthData} = require('../database');
-const {jwtService: {generateTokenPair, verifyToken}} = require('../services');
+const {jwtService: {generateTokenPair}} = require('../services');
 const {userNormalize} = require('../handlers/user.normalize');
 const {statusCodeResponse, tokenTypeEnum: {REFRESH, ACCESS}} = require('../constants');
 
@@ -43,6 +43,7 @@ module.exports = {
         try {
             const token = req.token;
             await AuthData.deleteOne({[ACCESS]: token});
+
             res.sendStatus(statusCodeResponse.NO_DATA);
         } catch (e) {
             next(e)

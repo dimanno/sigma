@@ -36,9 +36,9 @@ module.exports = userSchema.statics = {
         });
     },
 
-    updateData(userId, userDataObject) {
+    updateData(user_Id, userDataObject) {
         return this.findByIdAndUpdate(
-            userId,
+            user_Id,
             userDataObject,
             {new: true, runValidators: true}
         ).lean();

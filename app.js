@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 require('dotenv').config();
 
 const {PORT, MONGO_CONNECT, NODE_ENV, ALLOWED_ORIGIN} = require('./configs/config');
-const {usersRouter, authRouter} = require('./routes');
+const {usersRouter, authRouter, postRouter} = require('./routes');
 const ErrorHandler = require('./errors/errors.handler');
 const insertDefaultData = require('./handlers/default.user')
 
@@ -18,6 +18,7 @@ mongoose.connect(MONGO_CONNECT).then(()=>{
 });
 
 app.use('/auth', authRouter);
+app.use('/posts', postRouter);
 app.use('/users', usersRouter);
 
 // eslint-disable-next-line no-unused-vars
