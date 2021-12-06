@@ -1,15 +1,17 @@
 const express = require('express');
 const mongoose = require("mongoose");
 const rateLimit = require('express-rate-limit');
+const cors = require('cors');
+const helmet = require('helmet');
+const swaggerUI = require('swagger-ui-express');
 
 require('dotenv').config();
 
 const {PORT, MONGO_CONNECT, NODE_ENV, ALLOWED_ORIGIN} = require('./configs/config');
 const {usersRouter, authRouter, postRouter} = require('./routes');
 const ErrorHandler = require('./errors/errors.handler');
-const cors = require('cors');
-const insertDefaultData = require('./handlers/default.user');
-const helmet = require('helmet');
+const insertDefaultUser = require('./handlers/default.user');
+const swaggerJson = require('./Docs/swagger.json');
 
 const app = express();
 
@@ -32,6 +34,8 @@ mongoose.connect(MONGO_CONNECT).then(()=>{
     console.log('mongo connect successfully');
 });
 
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJson));
+
 app.use('/auth', authRouter);
 app.use('/posts', postRouter);
 app.use('/users', usersRouter);
@@ -45,10 +49,10 @@ app.use('*', (err, req, res, next) => {
         });
 });
 
-app.listen(5005, () => {
-    console.log(`app listen 5005`);
+app.listen(PORT, () => {
+    console.log(`app listen ${PORT}`);
 
-    insertDefaultData();
+    insertDefaultUser();
 });
 
 function _configCors(origin, callback) {

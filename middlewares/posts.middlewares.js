@@ -27,7 +27,7 @@ module.exports = {
             const {user_id} = post;
             console.log(user_id._id);
 
-            if (!_id === user_id._id) {
+            if (_id === user_id._id) {
                 throw new ErrorHandler(messageResponse.POST_NOT_FOUND, statusCodeResponse.NOT_FOUND);
             }
 

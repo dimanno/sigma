@@ -7,7 +7,7 @@ const {userValidator:{addUser_validator, updateUserValidator}, postValidator} = 
 
 router.get('/:user_id/posts', postsController.getPostsByUser);
 
-router.use(authMiddlewares.checkToken(ACCESS))
+// router.use(authMiddlewares.checkToken(ACCESS))
 
 router.post('/',
     universalMiddlewares.checkValidDataMiddleware(addUser_validator),
