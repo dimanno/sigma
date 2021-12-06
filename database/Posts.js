@@ -7,16 +7,17 @@ const PostsSchema = new Schema({
         type: String,
         required: true,
     },
-    UpdateAt: {
+    updateAt: {
         type: String,
-        // required: true
+        timestamps: true,
+        required: true
     },
     user_id: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: models_name.USER
     }
-}, {timestamps: true});
+}, {timestamps: true,});
 
 PostsSchema.pre('findOne', function() {
     this.populate('user_id');

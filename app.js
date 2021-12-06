@@ -9,6 +9,7 @@ const {usersRouter, authRouter, postRouter} = require('./routes');
 const ErrorHandler = require('./errors/errors.handler');
 const cors = require('cors');
 const insertDefaultData = require('./handlers/default.user');
+const helmet = require('helmet');
 
 const app = express();
 
@@ -16,10 +17,16 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use(cors({origin: _configCors}));
+app.use(helmet());
 app.use(rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 100 // limit each IP to 100 requests per windowMs
 }));
+
+if (NODE_ENV === 'dev') {
+    const morgan = require('morgan');
+    app.use(morgan('dev'));
+}
 
 mongoose.connect(MONGO_CONNECT).then(()=>{
     console.log('mongo connect successfully');
@@ -38,8 +45,8 @@ app.use('*', (err, req, res, next) => {
         });
 });
 
-app.listen(PORT, () => {
-    console.log(`app listen ${PORT}`);
+app.listen(5005, () => {
+    console.log(`app listen 5005`);
 
     insertDefaultData();
 });

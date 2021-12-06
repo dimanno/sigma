@@ -6,8 +6,9 @@ module.exports = async () => {
 
     if (!user) {
         await  User.createUserWithHashPassword({
-            name: 'testUser',
-            email: 'userTestK@gmail.com',
+            name: 'Admin',
+            email: 'admin@gmail.com',
+            age: 21,
             password: DEFAULT_USER_PASSWORD,
         })
     }
