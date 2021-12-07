@@ -25,6 +25,12 @@ module.exports = {
         }
     },
 
+    getPostById: (req, res) => {
+        const post = req.post;
+
+        res.json(post);
+    },
+
     getPostsByUser: async (req, res, next) => {
         try {
             const {user_id} = req.params;
@@ -38,8 +44,6 @@ module.exports = {
 
     updatePost: async (req, res, next) => {
         try {
-            // const {user_id:{_id}} = req.user
-
             const post_id = req.params
             const post = req.body;
 
@@ -54,9 +58,8 @@ module.exports = {
 
     deletePost:async (req, res, next) => {
         try {
-
-            const post_id = req.params
-            await Posts.deleteOne({post_id});
+            const {post_id} = req.post
+            await Posts.deleteOne(post_id);
 
             res.sendStatus(statusCodeResponse.NO_DATA);
         } catch (e) {

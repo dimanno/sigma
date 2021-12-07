@@ -45,11 +45,17 @@
             "schema": {
               "type": "object",
               "properties": {
+                "access_token": {
+                  "type": "string"
+                },
+                "refresh_token": {
+                  "type": "string"
+                }
               }
             }
           },
           "400": {
-            "description": "Invalid username/password supplied"
+            "description": "Invalid email/password supplied"
           }
         }
       }
@@ -71,11 +77,262 @@
         }
       }
     },
+    "/posts": {
+      "post": {
+        "tags": [
+          "posts"
+        ],
+        "summary": "Create post",
+        "description": "post object that needs to be added",
+        "operationId": "add Post",
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post was created",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/PostBodyModels"
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonErrors"
+            }
+          }
+        },
+        "security": [
+          {
+            "user_auth": [
+              "write:users"
+            ]
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "posts"
+        ],
+        "summary": "Get all posts",
+        "operationId": "get posts",
+        "responses": {
+          "200": {
+            "description": "All posts",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PostBodyModels"
+              }
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonErrors"
+            }
+          }
+        }
+      }
+    },
+    "/posts/{userId}": {
+      "get": {
+        "tags": [
+          "posts"
+        ],
+        "summary": "Get posts by userId",
+        "operationId": "get posts",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All posts",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PostBodyModels"
+              }
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonErrors"
+            }
+          }
+        }
+      }
+    },
+    "/posts/{userId}/{postId}": {
+      "get": {
+        "tags": [
+          "posts"
+        ],
+        "summary": "Get post by userId",
+        "operationId": "get post",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "ID of post to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All posts",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/PostBodyModels"
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonErrors"
+            }
+          }
+        }
+      }
+    },
+    "/posts/{postId}": {
+      "put": {
+        "tags": [
+          "posts"
+        ],
+        "summary": "Update posts by id",
+        "operationId": "update post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "This is access-token from POST /auth",
+            "required": true,
+            "type": "string",
+            "default": "token"
+          },
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "ID of post to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post is updated",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/PostBodyModels"
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "type": "string",
+              "$ref": "#/definitions/commonErrors"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "type": "string",
+              "$ref": "#/definitions/commonErrors"
+            }
+          }
+        },
+        "security": [
+          {
+            "user_auth": [
+              "write:users"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "posts"
+        ],
+        "summary": "Delete post by id",
+        "operationId": "delete post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "This is access-token from POST /auth",
+            "required": true,
+            "type": "string",
+            "default": "token"
+          },
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "ID of post to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post was deleted"
+          },
+          "400": {
+            "description": "Invalid ID supplied",
+            "schema": {
+              "type": "string",
+              "$ref": "#/definitions/commonErrors"
+            }
+          },
+          "404": {
+            "description": "Post not found",
+            "schema": {
+              "type": "string",
+              "$ref": "#/definitions/commonErrors"
+            }
+          }
+        },
+        "security": [
+          {
+            "user_auth": [
+              "write:users"
+            ]
+          }
+        ]
+      }
+    },
     "/users": {
       "post": {
         "tags": [
           "users"
         ],
+        "summary": "Create user",
         "description": "user object that needs to be added",
         "operationId": "addUser",
         "parameters": [
@@ -130,16 +387,7 @@
           "400": {
             "description": "Just an error",
             "schema": {
-              "properties": {
-                "msg": {
-                  "type": "string",
-                  "example": "Something went wrong"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 400
-                }
-              }
+              "$ref": "#/definitions/commonErrors"
             }
           }
         },
@@ -155,7 +403,7 @@
         "tags": [
           "users"
         ],
-        "summary": "get all users",
+        "summary": "Get all users",
         "operationId": "getUsers",
         "responses": {
           "200": {
@@ -170,16 +418,7 @@
           "400": {
             "description": "Just an error",
             "schema": {
-              "properties": {
-                "msg": {
-                  "type": "string",
-                  "example": "Something went wrong"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 400
-                }
-              }
+              "$ref": "#/definitions/commonErrors"
             }
           }
         }
@@ -190,7 +429,7 @@
         "tags": [
           "users"
         ],
-        "summary": "get user by id",
+        "summary": "Get user by id",
         "operationId": "getUser",
         "parameters": [
           {
@@ -213,31 +452,15 @@
           "400": {
             "description": "Invalid ID supplied",
             "schema": {
-              "properties": {
-                "msg": {
-                  "type": "string",
-                  "example": "Something went wrong"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 400
-                }
-              }
+              "type": "string",
+              "$ref": "#/definitions/commonErrors"
             }
           },
           "404": {
             "description": "User not found",
             "schema": {
-              "properties": {
-                "msg": {
-                  "type": "string",
-                  "example": "Something went wrong"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 404
-                }
-              }
+              "type": "string",
+              "$ref": "#/definitions/commonErrors"
             }
           }
         }
@@ -246,7 +469,7 @@
         "tags": [
           "users"
         ],
-        "summary": "update user by id",
+        "summary": "Update user by id",
         "operationId": "updateUser",
         "parameters": [
           {
@@ -277,31 +500,15 @@
           "400": {
             "description": "Invalid ID supplied",
             "schema": {
-              "properties": {
-                "msg": {
-                  "type": "string",
-                  "example": "Something went wrong"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 400
-                }
-              }
+              "type": "string",
+              "$ref": "#/definitions/commonErrors"
             }
           },
           "404": {
             "description": "User not found",
             "schema": {
-              "properties": {
-                "msg": {
-                  "type": "string",
-                  "example": "Something went wrong"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 404
-                }
-              }
+              "type": "string",
+              "$ref": "#/definitions/commonErrors"
             }
           }
         },
@@ -317,7 +524,7 @@
         "tags": [
           "users"
         ],
-        "summary": "update user by id",
+        "summary": "Delete user by id",
         "operationId": "deleteUser",
         "responses": {
           "200": {
@@ -326,31 +533,15 @@
           "400": {
             "description": "Invalid ID supplied",
             "schema": {
-              "properties": {
-                "msg": {
-                  "type": "string",
-                  "example": "Something went wrong"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 400
-                }
-              }
+              "type": "string",
+              "$ref": "#/definitions/commonErrors"
             }
           },
           "404": {
             "description": "User not found",
             "schema": {
-              "properties": {
-                "msg": {
-                  "type": "string",
-                  "example": "Something went wrong"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 404
-                }
-              }
+              "type": "string",
+              "$ref": "#/definitions/commonErrors"
             }
           }
         },
@@ -380,6 +571,32 @@
         }
       }
     },
+    "PostBodyModels": {
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string",
+          "example": "12345qwerty",
+          "description": "MongoDB ID"
+        },
+        "user_id": {
+          "type": "string",
+          "example": "12345qwerty",
+          "description": "MongoDB ID of the user to whom the post belongs"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "date in UTC when post create"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date in UTC when post update"
+        }
+      }
+    },
     "UserBodyModels": {
       "properties": {
         "_id": {
@@ -397,6 +614,18 @@
         },
         "age": {
           "type": "number"
+        }
+      }
+    },
+    "commonErrors": {
+      "properties": {
+        "msg": {
+          "type": "string",
+          "example": "Something went wrong"
+        },
+        "code": {
+          "type": "number",
+          "example": 400
         }
       }
     }
