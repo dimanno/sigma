@@ -11,17 +11,20 @@
     }
   },
   "host": "localhost:5005",
+  "schemes": [
+    "http"
+  ],
   "paths": {
     "/users": {
       "post": {
         "tags": [
           "users"
         ],
-        "description": "add new user to app",
+        "description": "user object that needs to be added",
         "operationId": "addUser",
         "parameters": [
           {
-            "in": "formData",
+            "in": "body",
             "name": "name",
             "description": "User name",
             "required": true,
@@ -29,7 +32,7 @@
             "default": "name"
           },
           {
-            "in": "formData",
+            "in": "body",
             "name": "email",
             "description": "User email",
             "required": true,
@@ -37,7 +40,7 @@
             "default": "admin@gmail.com"
           },
           {
-            "in": "formData",
+            "in": "body",
             "name": "password",
             "description": "User password",
             "required": true,
@@ -45,7 +48,7 @@
             "default": "12345Az$"
           },
           {
-            "in": "formData",
+            "in": "body",
             "name": "age",
             "description": "User age",
             "required": true,
@@ -57,6 +60,12 @@
             "description": "User was created",
             "schema": {
               "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "12345qwerty"
+                }
+              },
               "$ref": "#/definitions/UserBody"
             }
           },
