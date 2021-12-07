@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0",
+    "version": "1.1",
     "title": "Sigma test-task",
     "description": "Create REST API. Implement authorization and CRUD for users ",
     "contact": {
@@ -24,23 +24,23 @@
         "operationId": "addUser",
         "parameters": [
           {
-            "in": "body",
-            "name": "name",
-            "description": "User name",
+            "in": "header",
+            "name": "Authorization",
+            "description": "This is access-token from POST /auth",
             "required": true,
             "type": "string",
             "default": "name"
           },
           {
-            "in": "body",
+            "in": "formData",
             "name": "email",
             "description": "User email",
             "required": true,
             "type": "string",
-            "default": "admin@gmail.com"
+            "default": "name"
           },
           {
-            "in": "body",
+            "in": "formData",
             "name": "password",
             "description": "User password",
             "required": true,
@@ -48,7 +48,15 @@
             "default": "12345Az$"
           },
           {
-            "in": "body",
+            "in": "formData",
+            "name": "name",
+            "description": "User name",
+            "required": true,
+            "type": "string",
+            "default": "admin@gmail.com"
+          },
+          {
+            "in": "formData",
             "name": "age",
             "description": "User age",
             "required": true,
@@ -60,13 +68,80 @@
             "description": "User was created",
             "schema": {
               "type": "object",
+              "$ref": "#/definitions/UserBodyModels"
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
               "properties": {
-                "_id": {
+                "msg": {
                   "type": "string",
-                  "example": "12345qwerty"
+                  "example": "Something went wrong"
+                },
+                "code": {
+                  "type": "number",
+                  "example": 400
                 }
-              },
-              "$ref": "#/definitions/UserBody"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "user_auth": [
+              "write:users"
+            ]
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get all users",
+        "operationId": "getUsers",
+        "responses": {
+          "200": {
+            "description": "All users",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserBodyModels"
+              }
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "example": "Something went wrong"
+                },
+                "code": {
+                  "type": "number",
+                  "example": 400
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get user by id",
+        "operationId": "getUser",
+        "responses": {
+          "200": {
+            "description": "user",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/UserBodyModels"
             }
           },
           "400": {
@@ -86,38 +161,18 @@
           }
         }
       },
-      "get": {
+      "put": {
         "tags": [
           "users"
         ],
-        "summary": "get all users",
-        "description": "get array users",
-        "operationId": "getUsers",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "page",
-            "description": "get users",
-            "required": false,
-            "type": "number",
-            "default": 1
-          },
-          {
-            "in": "formData",
-            "name": "perPage",
-            "required": false,
-            "type": "number",
-            "default": 20
-          }
-        ],
+        "summary": "update user by id",
+        "operationId": "updateUser",
         "responses": {
           "200": {
-            "description": "All users",
+            "description": "user",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/UserBody"
-              }
+              "type": "object",
+              "$ref": "#/definitions/UserBodyModels"
             }
           },
           "400": {
@@ -140,21 +195,23 @@
     }
   },
   "definitions": {
-    "UserBody": {
+    "UserBodyModels": {
       "properties": {
-        "id": {
+        "_id": {
           "type": "string",
-          "example": "12345query",
-          "description": "mongoDB ID"
+          "example": "12345qwerty",
+          "description": "MongoDB ID"
         },
         "email": {
           "type": "string",
-          "example": "bar@gmail.com"
+          "example": "admin@gmail.com"
         },
         "name": {
           "type": "string",
-          "example": "Dimas",
-          "description": "User name"
+          "example": "admin"
+        },
+        "age": {
+          "type": "number"
         }
       }
     }
