@@ -52,7 +52,7 @@ app.use('*', (err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`app listen ${PORT}`);
 
-    insertDefaultUser();
+    insertDefaultUser().then();
 });
 
 function _configCors(origin, callback) {

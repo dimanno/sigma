@@ -2,9 +2,8 @@
  const {DEFAULT_USER_PASSWORD} = require('../configs/config');
 
 module.exports = async () => {
-    const user = await User.find();
-
-    if (!user) {
+    const user = await User.find().lean();
+    if (!user.length) {
         await  User.createUserWithHashPassword({
             name: 'Admin',
             email: 'admin@gmail.com',

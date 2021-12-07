@@ -25,9 +25,10 @@ module.exports = {
             console.log(_id);
             const post = await Posts.findOne({_id: req.params});
             const {user_id} = post;
-            console.log(user_id._id);
+            console.log(typeof user_id._id);
+            console.log(typeof _id);
 
-            if (_id === user_id._id) {
+            if (_id.toString() !== user_id._id.toString()) {
                 throw new ErrorHandler(messageResponse.POST_NOT_FOUND, statusCodeResponse.NOT_FOUND);
             }
 
