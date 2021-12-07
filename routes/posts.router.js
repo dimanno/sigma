@@ -13,6 +13,6 @@ router.post('/create',
     universalMiddlewares.checkValidDataMiddleware(postValidator.addPost_validator),
     postsController.addPost);
 router.put('/update/:_id', postMiddlewares.checkUserPost, postsController.updatePost);
-router.delete('/delete/:_id', postsController.deletePost);
+router.delete('/delete/:_id', postMiddlewares.checkUserPost, postsController.deletePost);
 
 module.exports = router;
