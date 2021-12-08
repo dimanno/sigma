@@ -111,7 +111,7 @@
         "security": [
           {
             "user_auth": [
-              "write:users"
+              "write:posts"
             ]
           }
         ]
@@ -270,7 +270,7 @@
         "security": [
           {
             "user_auth": [
-              "write:users"
+              "edit:posts"
             ]
           }
         ]
@@ -321,7 +321,7 @@
         "security": [
           {
             "user_auth": [
-              "write:users"
+              "delete:posts"
             ]
           }
         ]
@@ -515,7 +515,7 @@
         "security": [
           {
             "user_auth": [
-              "write:users"
+              "edit:users"
             ]
           }
         ]
@@ -548,7 +548,7 @@
         "security": [
           {
             "user_auth": [
-              "write:users"
+              "delete:users"
             ]
           }
         ]
