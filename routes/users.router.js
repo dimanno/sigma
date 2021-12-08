@@ -3,11 +3,11 @@ const router = require('express').Router();
 const {usersMiddlewares, authMiddlewares, universalMiddlewares} = require('../middlewares');
 const {usersController, postsController} = require('../controllers');
 const {tokenTypeEnum: {ACCESS}}= require('../constants');
-const {userValidator:{addUser_validator, updateUserValidator}, postValidator} = require('../validators')
+const {userValidator:{addUser_validator, updateUserValidator}} = require('../validators');
 
 router.get('/:user_id/posts', postsController.getPostsByUser);
 
-router.use(authMiddlewares.checkToken(ACCESS))
+router.use(authMiddlewares.checkToken(ACCESS));
 
 router.post('/',
     universalMiddlewares.checkValidDataMiddleware(addUser_validator),

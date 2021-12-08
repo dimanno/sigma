@@ -1,5 +1,4 @@
-const router = require('express')
-    .Router();
+const router = require('express').Router();
 
 const {postsController} = require('../controllers');
 const {authMiddlewares, universalMiddlewares, postMiddlewares, usersMiddlewares} = require('../middlewares');

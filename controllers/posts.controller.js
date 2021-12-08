@@ -1,6 +1,5 @@
-const {Posts, User, AuthData} = require('../database');
+const {Posts} = require('../database');
 const {statusCodeResponse} = require('../constants');
-const {postValidator} = require('../validators');
 
 module.exports = {
     addPost: async (req, res, next) => {

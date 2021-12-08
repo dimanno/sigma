@@ -14,22 +14,23 @@ module.exports = {
             }
 
             req.post = post;
-
             next();
         } catch (e) {
             next(e);
         }
     },
+
     checkUserPost: async (req, res, next) => {
         try {
-            const {user_id:{_id}} = req.user
+            const {user_id:{_id}} = req.user;
             const post = await Posts.findOne({_id: req.params});
             const {user_id} = post;
 
             if (_id.toString() !== user_id._id.toString()) {
                 throw new ErrorHandler(messageResponse.ACCESS_DENIED, statusCodeResponse.CONFLICT);
             }
-            req.body = post
+
+            req.body = post;
             next();
         } catch (e) {
             next(e);
