@@ -29,7 +29,7 @@ module.exports = {
             if (_id.toString() !== user_id._id.toString()) {
                 throw new ErrorHandler(messageResponse.ACCESS_DENIED, statusCodeResponse.CONFLICT);
             }
-            req.post = post
+            req.body = post
             next();
         } catch (e) {
             next(e);

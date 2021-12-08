@@ -146,7 +146,7 @@
         "tags": [
           "posts"
         ],
-        "summary": "Get posts by userId",
+        "summary": "Get all posts by userId",
         "operationId": "get posts",
         "parameters": [
           {

@@ -58,8 +58,8 @@ module.exports = {
 
     deletePost:async (req, res, next) => {
         try {
-            const {post_id} = req.post
-            await Posts.deleteOne(post_id);
+            const {_id} = req.body
+            await Posts.deleteOne({_id});
 
             res.sendStatus(statusCodeResponse.NO_DATA);
         } catch (e) {

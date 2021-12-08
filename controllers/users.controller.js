@@ -54,10 +54,10 @@ module.exports = {
 
     deleteUser: async (req, res, next) => {
         try {
-            const {user_id} = req.params;
-
-            await User.deleteOne({user_id});
-            await AuthData.deleteOne({...user_id});
+            const {_id} = req.body;
+console.log(_id)
+            await User.deleteOne({_id});
+            await AuthData.deleteMany({user_id: _id});
 
             res.sendStatus(statusCodeResponse.NO_DATA);
         } catch (e) {

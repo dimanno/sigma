@@ -40,7 +40,7 @@ module.exports = {
         try {
             const {user_id} = req.params;
             const user = await User.findById(user_id).lean();
-
+console.log(user)
             if (!user && user_id) {
                 throw  new ErrorHandler(messageResponse.USER_NOT_FOUND, statusCodeResponse.NOT_FOUND);
             }

@@ -9,7 +9,6 @@ const {postValidator} = require('../validators');
 router.get('/', postsController.getAllPosts);
 router.get('/:user_id', usersMiddlewares.checkUserById, postsController.getPostsByUser);
 router.get('/:user_id/:post_id',
-    usersMiddlewares.checkUserById,
     postMiddlewares.checkPostExist,
     postsController.getPostById);
 

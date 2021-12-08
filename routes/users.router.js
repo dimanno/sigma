@@ -19,6 +19,6 @@ router.get('/:user_id', usersMiddlewares.checkUserById, usersController.getUserB
 router.put('/:user_id',
     universalMiddlewares.checkValidDataMiddleware(updateUserValidator),
     usersController.updateUser);
-router.delete('/:user_id', usersController.deleteUser);
+router.delete('/:user_id', usersMiddlewares.checkUserById, usersController.deleteUser);
 
 module.exports = router;
