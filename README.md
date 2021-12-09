@@ -25,6 +25,14 @@ cd backend
 npm i
 node app
 ```
+## Docker
+```sh
+$ docker-compose build
+$ docker-compose up
+
+```
+http://sigmatesttask-env.eba-v3txmsem.us-east-1.elasticbeanstalk.com/api/posts
+
 ## _The REST API to the example app is described below_.
 
 ### Authorization
