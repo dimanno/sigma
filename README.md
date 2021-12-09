@@ -25,3 +25,67 @@ cd backend
 npm i
 node app
 ```
+## Docker
+
+Yuu can also to install and deploy in a Docker container.
+
+```sh
+$ docker-compose build
+$ docker-compose up
+
+```
+http://sigmatesttask-env.eba-v3txmsem.us-east-1.elasticbeanstalk.com/api/posts
+
+## _The REST API to the example app is described below_.
+
+### Authorization
+###### Request
+
+```sh
+GET /auth
+```
+###### Body
+
+```sh
+{
+    "email": "example@gmail.com",
+    "password": "example$"
+}
+```
+###### Response
+
+```sh
+{
+    "user": {
+        "_id": "......",
+        "email": "user@email",
+        "name": "username",
+        "age": number,
+        "createdAt": "date",
+        "updatedAt": "date",
+        "__v": 0
+    },
+    "access_token": ".......",
+    "refresh_token": "......."
+}
+```
+### Example closed endpoint, only after authorization
+- #### Get list of users
+##### Request
+
+```sh
+GET /users
+```
+http://localhost/api/users 
+
+### Example open endpoint
+- #### Get list of posts
+##### Request
+
+```sh
+GET /posts
+```
+http://localhost/api/posts 
+
+
+
