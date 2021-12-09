@@ -26,6 +26,9 @@ npm i
 node app
 ```
 ## Docker
+
+Yuu can also to install and deploy in a Docker container.
+
 ```sh
 $ docker-compose build
 $ docker-compose up
