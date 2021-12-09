@@ -65,4 +65,6 @@ GET /auth
 ```sh
 GET /users
 ```
+http://localhost/api/users - in browser
+```
 
