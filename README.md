@@ -69,7 +69,7 @@ GET /auth
     "refresh_token": "......."
 }
 ```
-### Сlosed endpoints, only after authorization -
+### Example closed endpoint, only after authorization
 - #### Get list of Users
 ##### Request
 
@@ -77,5 +77,15 @@ GET /auth
 GET /users
 ```
 http://localhost/api/users 
+
+### Example open endpoint
+- #### Get list of Users
+##### Request
+
+```sh
+GET /posts
+```
+http://localhost/api/posts 
+
 
 
