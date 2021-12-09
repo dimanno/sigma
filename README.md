@@ -14,6 +14,7 @@
 - [Docker]
 
 ## Installation
+Make a clone of this repository
 
 You need [Node.js](https://nodejs.org/) v10+ to run.
 
