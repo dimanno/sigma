@@ -12,3 +12,15 @@
 - [Swagger] - for documentation
 - [AWS - Elastic Beanstalk] - for aplloy project
 - [Docker]
+
+## Installation
+
+You need [Node.js](https://nodejs.org/) v10+ to run.
+
+Install the dependencies and devDependencies and start the server.
+
+```sh
+cd backend
+npm i
+node app
+```
