@@ -23,7 +23,7 @@ module.exports = {
             const token = req.get(constants.AUTHORIZATION);
 
             if (!token) {
-                throw new  ErrorHandler(messageResponse.INVALID_TOKEN, statusCodeResponse.INVALID_CLIENT)
+                throw new  ErrorHandler(messageResponse.INVALID_TOKEN, statusCodeResponse.INVALID_CLIENT);
             }
 
             await jwtService.verifyToken(token, tokenType);
@@ -33,7 +33,7 @@ module.exports = {
                 .populate('user_id');
 
             if (!responseToken) {
-                throw new  ErrorHandler(messageResponse.INVALID_TOKEN, statusCodeResponse.INVALID_CLIENT)
+                throw new  ErrorHandler(messageResponse.INVALID_TOKEN, statusCodeResponse.INVALID_CLIENT);
             }
 
             req.user = responseToken
