@@ -70,7 +70,7 @@ GET /auth
 }
 ```
 ### Example closed endpoint, only after authorization
-- #### Get list of Users
+- #### Get list of users
 ##### Request
 
 ```sh
@@ -79,7 +79,7 @@ GET /users
 http://localhost/api/users 
 
 ### Example open endpoint
-- #### Get list of Users
+- #### Get list of posts
 ##### Request
 
 ```sh
