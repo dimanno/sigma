@@ -25,3 +25,44 @@ cd backend
 npm i
 node app
 ```
+## _The REST API to the example app is described below_.
+
+### Authorization
+###### Request
+
+```sh
+GET /auth
+```
+###### Body
+
+```sh
+{
+    "email": "example@gmail.com",
+    "password": "example$"
+}
+```
+###### Response
+
+```sh
+{
+    "user": {
+        "_id": "......",
+        "email": "user@email",
+        "name": "username",
+        "age": number,
+        "createdAt": "date",
+        "updatedAt": "date",
+        "__v": 0
+    },
+    "access_token": ".......",
+    "refresh_token": "......."
+}
+```
+### Сlosed endpoints, only after authorization -
+- #### Get list of Users
+##### Request
+
+```sh
+GET /users
+```
+
