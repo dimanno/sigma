@@ -450,7 +450,7 @@
                   "email": {
                     "type": "string",
                     "description": "User email",
-                    "default": "name"
+                    "default": "admin@gmail.com"
                   },
                   "password": {
                     "type": "string",
@@ -460,7 +460,7 @@
                   "name": {
                     "type": "string",
                     "description": "User name",
-                    "default": "admin@gmail.com"
+                    "default": "name"
                   },
                   "age": {
                     "type": "number",
