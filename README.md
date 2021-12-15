@@ -34,7 +34,7 @@ $ docker-compose build
 $ docker-compose up
 
 ```
-http://sigmatesttask-env.eba-v3txmsem.us-east-1.elasticbeanstalk.com/api/posts
+http://sigmaproject-env.eba-r9efiqtd.us-east-1.elasticbeanstalk.com/api/posts
 
 ## _The REST API to the example app is described below_.
 
