@@ -5,6 +5,6 @@ module.exports = {
         fieldToRemove.forEach((field) => {
             delete userNorm[field];
         })
-        return userNorm
+        return userNorm;
     }
 };
