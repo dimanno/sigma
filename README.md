@@ -76,7 +76,7 @@ GET /auth
 ```sh
 GET /users
 ```
-http://localhost/api/users 
+http://localhost:5005/users 
 
 ### Example open endpoint
 - #### Get list of posts
@@ -85,7 +85,7 @@ http://localhost/api/users
 ```sh
 GET /posts
 ```
-http://localhost/api/posts 
+http://localhost:5005/posts 
 
 ## Documentation
 
