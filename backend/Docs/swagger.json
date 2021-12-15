@@ -22,19 +22,30 @@
           "Authorization"
         ],
         "summary": "Logs user into the system",
-        "operationId": "loginUser",
+        "description": "loginUser",
         "requestBody": {
-          "description": "The user email for login",
+          "required": true,
           "content": {
-            "*/*": {}
-          },
-          "required": true
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
         },
         "responses": {
           "200": {
             "description": "successful operation",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
@@ -51,10 +62,20 @@
           },
           "400": {
             "description": "Invalid email/password supplied",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
-        },
-        "x-codegen-request-body-name": "email"
+        }
       }
     },
     "/auth/logout": {
@@ -83,7 +104,7 @@
           "200": {
             "description": "All posts",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -96,7 +117,7 @@
           "400": {
             "description": "Just an error",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -114,7 +135,11 @@
         "operationId": "add Post",
         "requestBody": {
           "content": {
-            "*/*": {}
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostBodyModels"
+              }
+            }
           },
           "required": true
         },
@@ -122,7 +147,7 @@
           "200": {
             "description": "Post was created",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PostBodyModels"
                 }
@@ -132,7 +157,7 @@
           "400": {
             "description": "Just an error",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -165,7 +190,7 @@
           "200": {
             "description": "All posts",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -178,7 +203,7 @@
           "400": {
             "description": "Just an error",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -221,7 +246,7 @@
           "200": {
             "description": "All posts",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PostBodyModels"
                 }
@@ -231,7 +256,7 @@
           "400": {
             "description": "Just an error",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -274,7 +299,7 @@
           "200": {
             "description": "post is updated",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PostBodyModels"
                 }
@@ -284,7 +309,7 @@
           "400": {
             "description": "Just an error",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -294,7 +319,7 @@
           "404": {
             "description": "User not found",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -339,7 +364,7 @@
           "400": {
             "description": "Invalid ID supplied",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -349,7 +374,7 @@
           "404": {
             "description": "Post not found",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -370,7 +395,7 @@
           "200": {
             "description": "All users",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -383,7 +408,7 @@
           "400": {
             "description": "Just an error",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -451,7 +476,7 @@
           "200": {
             "description": "User was created",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserBodyModels"
                 }
@@ -461,7 +486,7 @@
           "400": {
             "description": "Just an error",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -494,7 +519,7 @@
           "200": {
             "description": "user",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserBodyModels"
                 }
@@ -504,7 +529,7 @@
           "400": {
             "description": "Invalid ID supplied",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -514,7 +539,7 @@
           "404": {
             "description": "User not found",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -555,7 +580,7 @@
           "200": {
             "description": "user is updated",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserBodyModels"
                 }
@@ -565,7 +590,7 @@
           "400": {
             "description": "Invalid ID supplied",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -620,7 +645,7 @@
           "400": {
             "description": "Invalid ID supplied",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
@@ -630,7 +655,7 @@
           "404": {
             "description": "User not found",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/commonErrors"
                 }
