@@ -87,7 +87,7 @@ GET /posts
 ```
 http://localhost/api/posts 
 
-## Documentatiom
+## Documentation
 
 http://sigmaproject-env.eba-r9efiqtd.us-east-1.elasticbeanstalk.com/docs/
 
