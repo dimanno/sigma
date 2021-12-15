@@ -34,7 +34,7 @@ $ docker-compose build
 $ docker-compose up
 
 ```
-http://sigmatesttask-env.eba-v3txmsem.us-east-1.elasticbeanstalk.com/api/posts
+http://sigmaproject-env.eba-r9efiqtd.us-east-1.elasticbeanstalk.com/api/posts
 
 ## _The REST API to the example app is described below_.
 
@@ -76,7 +76,7 @@ GET /auth
 ```sh
 GET /users
 ```
-http://localhost/api/users 
+http://localhost:5005/users 
 
 ### Example open endpoint
 - #### Get list of posts
@@ -85,7 +85,10 @@ http://localhost/api/users
 ```sh
 GET /posts
 ```
-http://localhost/api/posts 
+http://localhost:5005/posts 
 
+## Documentation
+
+http://sigmaproject-env.eba-r9efiqtd.us-east-1.elasticbeanstalk.com/docs/
 
 
