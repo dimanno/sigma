@@ -23,7 +23,9 @@ module.exports = {
     checkUserPost: async (req, res, next) => {
         try {
             const {user_id:{_id}} = req.user;
+            console.log(_id);
             const post = await Posts.findOne({_id: req.params});
+            console.log(post);
             const {user_id} = post;
 
             if (_id.toString() !== user_id._id.toString()) {

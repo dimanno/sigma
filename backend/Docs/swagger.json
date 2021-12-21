@@ -22,7 +22,7 @@
           "Authorization"
         ],
         "summary": "Logs user into the system",
-        "description": "loginUser",
+        "description": "Return object with token pair",
         "requestBody": {
           "required": true,
           "content": {
@@ -98,8 +98,8 @@
         "tags": [
           "posts"
         ],
-        "summary": "Get all posts",
-        "operationId": "get posts",
+        "summary": "Return array objects of posts",
+        "description": "get posts",
         "responses": {
           "200": {
             "description": "All posts",
@@ -130,9 +130,13 @@
         "tags": [
           "posts"
         ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "summary": "Create post",
         "description": "post object that needs to be added",
-        "operationId": "add Post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -172,7 +176,12 @@
         "tags": [
           "posts"
         ],
-        "summary": "Get all posts by userId",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Return array posts objects",
         "description": "get posts",
         "parameters": [
           {
@@ -181,8 +190,7 @@
             "description": "ID of user to return",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
@@ -218,7 +226,12 @@
         "tags": [
           "posts"
         ],
-        "summary": "Get post by userId",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Return post object",
         "operationId": "get post",
         "parameters": [
           {
@@ -227,8 +240,7 @@
             "description": "ID of user to return",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           },
           {
@@ -237,8 +249,7 @@
             "description": "ID of post to return",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
@@ -271,27 +282,21 @@
         "tags": [
           "posts"
         ],
-        "summary": "Update posts by id",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Return Updated post object",
         "operationId": "update post",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "This is access-token from POST /auth",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "token"
-            }
-          },
           {
             "name": "postId",
             "in": "path",
             "description": "ID of post to return",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
@@ -332,27 +337,21 @@
         "tags": [
           "posts"
         ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "summary": "Delete post by id",
         "operationId": "delete post",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "This is access-token from POST /auth",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "token"
-            }
-          },
           {
             "name": "postId",
             "in": "path",
             "description": "ID of post to return",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
@@ -389,8 +388,13 @@
         "tags": [
           "users"
         ],
-        "summary": "Get all users",
-        "operationId": "getUsers",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Return Array users objects",
+        "description": "getUsers",
         "responses": {
           "200": {
             "description": "All users",
@@ -421,24 +425,17 @@
         "tags": [
           "users"
         ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "summary": "Create user",
         "description": "user object that needs to be added",
         "operationId": "addUser",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "This is `access-token` from POST /auth",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "token"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "required": [
                   "age",
@@ -501,8 +498,13 @@
         "tags": [
           "users"
         ],
-        "summary": "Get user by id",
-        "operationId": "getUser",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Return user object",
+        "description": "getUser",
         "parameters": [
           {
             "name": "userId",
@@ -510,8 +512,7 @@
             "description": "ID of user to return",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
@@ -552,27 +553,21 @@
         "tags": [
           "users"
         ],
-        "summary": "Update user by id",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Return Updated user object",
         "operationId": "updateUser",
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "This is access-token from POST /auth",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "token"
-            }
-          },
           {
             "name": "userId",
             "in": "path",
             "description": "ID of user to return",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
@@ -613,27 +608,21 @@
         "tags": [
           "users"
         ],
-        "summary": "Delete user by id",
-        "operationId": "deleteUser",
-        "parameters": [
+        "security": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "This is access-token from POST /auth",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "token"
-            }
-          },
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Delete user by id",
+        "description": "deleteUser",
+        "parameters": [
           {
             "name": "userId",
             "in": "path",
             "description": "ID of user to return",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
@@ -743,6 +732,14 @@
             "example": 400
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "description": "Enter JWT access token",
+        "type": "apiKey",
+        "in": "header",
+        "name": "authorization"
       }
     }
   }
