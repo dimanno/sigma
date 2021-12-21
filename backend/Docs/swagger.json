@@ -141,7 +141,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PostBodyModels"
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "example": "create your post"
+                  }
+                }
               }
             }
           },
@@ -255,7 +260,7 @@
         ],
         "responses": {
           "200": {
-            "description": "All posts",
+            "description": "Return post",
             "content": {
               "application/json": {
                 "schema": {
@@ -288,7 +293,7 @@
           }
         ],
         "summary": "Return Updated post object",
-        "operationId": "update post",
+        "description": "update post",
         "parameters": [
           {
             "name": "postId",
@@ -300,6 +305,20 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "post is updated",
@@ -571,6 +590,31 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "description": "User password",
+                    "default": "12345Az$"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "User name",
+                    "default": "name"
+                  },
+                  "age": {
+                    "type": "number",
+                    "description": "User age"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "user is updated",
